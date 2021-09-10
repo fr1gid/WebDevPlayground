@@ -3,7 +3,8 @@
 */
 import React, { useState } from 'react';
 import useCurrentUser from '../../../customHooks/useCurrentUser';
-import { Row, Tabs, Col, Avatar, Tooltip } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { Row, Tabs, Col, Avatar, Tooltip, Upload, message, Button } from 'antd';
 import {
   ActionHeader,
   SubH2,
@@ -20,7 +21,6 @@ import { TabLayout, InfoRow } from './layouts';
 import './styles.css';
 
 const { TabPane } = Tabs;
-
 const SettingsPage = () => {
   // TODO: Add team members logic
   // const [stateAddTeamMember, setStateAddTeamMember] = useState(true);
@@ -96,6 +96,25 @@ const SettingsPage = () => {
     </Tabs>
   );
 
+  // Props for uploader button
+  const uploadProps = {
+    name: 'file',
+    action: temporaryAction,
+    headers: {
+      authorization: 'authorization-text'
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+
   const renderActivityCard = (
     <CardWrap height={320} className='details-card'>
       <SpaceBetween>
@@ -118,9 +137,16 @@ const SettingsPage = () => {
                 <InfoRow
                   name='Team:'
                   data={userData.team ? userData.team.name : 'Not created'}
-                />
+                  />
               </div>
             </Flex>
+            <Upload {...uploadProps}>
+              <Button
+                icon={<UploadOutlined />}
+                style={{ marginTop: 20 }}>
+                Click to Upload
+              </Button>
+            </Upload>
           </CardWrap>
         </Col>
         <Col span={11}>{renderActivityCard}</Col>
