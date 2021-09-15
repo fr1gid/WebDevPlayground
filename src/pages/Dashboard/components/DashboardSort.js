@@ -2,34 +2,40 @@
    Dashboard Sort Component 
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { Note2Grey } from "common";
 import { iconSort } from "media/svg";
-
 import { Menu, Dropdown, message } from "antd";
 
 const DashboardSort = () => {
-  const onClick = ({ key }) => {
-    message.info(`Sort items by ${key}`);
+  const [sortState, setSortState] = useState("");
+  const [activeIndex, setActiveIndex] = useState("");
+
+  const onClick = (el, index) => {
+    setActiveIndex(index);
+    setSortState(el);
+    message.info(`Sort items by ${el}`);
   };
 
+  const menu = [
+    "Renewal Date",
+    "Account Created",
+    "Highest score",
+    "Lowest score",
+    "Contract size",
+  ];
+
   const sortMenu = (
-    <Menu onClick={onClick}>
-      <Menu.Item key="Renewal Date">
-        <Note2Grey>Renewal Date</Note2Grey>
-      </Menu.Item>
-      <Menu.Item key="Account Created">
-        <Note2Grey>Account Created</Note2Grey>
-      </Menu.Item>
-      <Menu.Item key="Highest score">
-        <Note2Grey>Highest score</Note2Grey>
-      </Menu.Item>
-      <Menu.Item key="Lowest score">
-        <Note2Grey>Lowest score</Note2Grey>
-      </Menu.Item>
-      <Menu.Item key="Contract size">
-        <Note2Grey>Contract size</Note2Grey>
-      </Menu.Item>
+    <Menu>
+      {menu.map((el, index) => (
+        <Menu.Item
+          onClick={() => onClick(el, index)}
+          key={index}
+          className={activeIndex === index ? "active" : ""}
+        >
+          <Note2Grey>{el}</Note2Grey>
+        </Menu.Item>
+      ))}
     </Menu>
   );
 
@@ -37,7 +43,7 @@ const DashboardSort = () => {
     <Dropdown overlay={sortMenu}>
       <div className="sortBy">
         <img src={iconSort} alt="" />
-        <Note2Grey> Sort By </Note2Grey>
+        <Note2Grey> Sort by {sortState} </Note2Grey>
       </div>
     </Dropdown>
   );
