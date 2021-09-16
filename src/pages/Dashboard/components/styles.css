@@ -158,3 +158,18 @@
 .ant-pagination-total-text {
   padding-top: 0.16em;
 }
+
+/*Sort by icon*/
+
+.sortBy:hover {
+  cursor: pointer;
+}
+.active {
+  background-color: #dedede;
+}
+.ant-dropdown-menu-item:hover {
+  background-color: #dedede !important;
+}
+.ant-dropdown-menu {
+  padding: 0 !important;
+}
