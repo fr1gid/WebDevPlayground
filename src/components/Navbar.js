@@ -38,9 +38,6 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand href="/">
-          <img src={logo} className="img-fluid logo" alt="brand" />
-        </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => {
@@ -90,27 +87,6 @@ function NavBar() {
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
               </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                href="https://blogs.soumyajit.tech/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <ImBlog style={{ marginBottom: "2px" }} /> Blogs
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item className="fork-btn">
-              <Button
-                href="https://github.com/soumyajit4419/Portfolio"
-                target="_blank"
-                className="fork-btn-inner"
-              >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
-              </Button>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

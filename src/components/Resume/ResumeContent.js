@@ -7,6 +7,9 @@ function ResumeContent(props) {
         {props.title}
       </h5>
       <p>
+        <em>{props.location}</em>
+      </p>
+      <p>
         <em>{props.date}</em>
       </p>
       <ul>
